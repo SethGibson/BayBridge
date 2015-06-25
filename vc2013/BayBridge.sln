@@ -1,0 +1,20 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BayBridge", "BayBridge.vcxproj", "{6C91106A-7237-4AAB-91C1-D19A072C1FAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C91106A-7237-4AAB-91C1-D19A072C1FAB}.Debug|x64.ActiveCfg = Debug|x64
+		{6C91106A-7237-4AAB-91C1-D19A072C1FAB}.Debug|x64.Build.0 = Debug|x64
+		{6C91106A-7237-4AAB-91C1-D19A072C1FAB}.Release|x64.ActiveCfg = Release|x64
+		{6C91106A-7237-4AAB-91C1-D19A072C1FAB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
