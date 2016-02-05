@@ -5,7 +5,6 @@
 #include "cinder/gl/gl.h"
 #include "cinder/gl/Batch.h"
 #include "cinder/gl/GlslProg.h"
-#include "cinder/Rand.h"
 
 using namespace ci;
 using namespace std;
@@ -17,28 +16,15 @@ namespace BB
 		vec3	Position;
 		vec2	UV;
 		Color	LedColor;
-		bool	Active;
-		float	Age,
-				Lifespan;
+
 		LED(){}
-		LED(vec3 pPos, vec2 pUV) : Position(pPos), UV(pUV), LedColor(Color(0.25f,0.25f,0.25f)), Active(false)
-		{
-			Age = Lifespan = randFloat(30, 90);
-		}
-
-		LED(vec3 pPos, vec2 pUV, Color pColor) : Position(pPos), UV(pUV), LedColor(pColor), Active(false)
-		{
-			Age = Lifespan = randFloat(30, 90);
-		}
-
+		LED(vec3 pPos, vec2 pUV) : Position(pPos), UV(pUV), LedColor(Color(0.25f,0.25f,0.25f)){}
+		LED(vec3 pPos, vec2 pUV, Color pColor) : Position(pPos), UV(pUV), LedColor(pColor){}
 		LED(const LED &source)
 		{
 			Position = source.Position;
 			UV = source.UV;
 			LedColor = source.LedColor;
-			Active = source.Active;
-			Lifespan = source.Lifespan;
-			Age = Lifespan;
 		}
 
 		~LED(){}

@@ -96,7 +96,7 @@ void Bridge::BufferStrandData(bool pReload)
 
 	if (!pReload)
 	{
-		auto strandMesh = gl::VboMesh::create(geom::Sphere().radius(0.6f).subdivisions(8));
+		auto strandMesh = gl::VboMesh::create(geom::Sphere().radius(0.5f).subdivisions(8));
 		mStrandsVbo = gl::Vbo::create(GL_ARRAY_BUFFER, lights, GL_DYNAMIC_DRAW);
 
 		geom::BufferLayout	strandAttribs;
@@ -123,62 +123,22 @@ void Bridge::Update(Channel16u pDepth, bool pInvert, bool pClear)
 				float d = (float)pDepth.getValue(ivec2(x, y));
 				if (d >= S_RANGE.x&&d <= S_RANGE.y)
 				{
-					if (!t->Active)
-						t->Active = true;
-
-					if (t->Active&&t->Age > 0)
-					{
-						t->Age--;
-						float c = lmap<float>(t->Age, 0, t->Lifespan, 0.0f, 1.0f);
-						float m = lmap<float>(d, S_RANGE.x, S_RANGE.y, 1.0f, 0.0f);
-						t->LedColor = Color(c,c,c)*m;
-					}
-					else if (t->Active&&t->Age <= 0)
-					{
-						t->Active = false;
-						t->Age = t->Lifespan = randFloat(60, 180);
-						t->LedColor = Color::black();
-					}
+					float c = lmap<float>(d, S_RANGE.x, S_RANGE.y, 265.0f, 65.0f);
+					float r =  (1.0f*(int)pInvert) - c / 265.0f;
+					r = math<float>::abs(r);
+					t->LedColor = Color(r, r, r);
 				}
 				else
 				{
-					if (!t->Active)
+					if (pClear)
 					{
-						float c = 65.0f / 265.0f;
+						float c = math<float>::abs((1.0f*(int)pInvert) - (65.0f / 265.0f));
 						t->LedColor = Color(c, c, c);
-					}
-					else
-					{
-						if (t->Age > 0)
-						{
-							t->Age--;
-							float c = lmap<float>(t->Age, 0, t->Lifespan, 0.0f, 1.0f);
-							t->LedColor = Color(c, c, c);
-						}
-						else
-						{
-							t->Active = false;
-							t->Age = t->Lifespan = randFloat(30, 90);
-							t->LedColor = Color::black();
-						}
 					}
 				}
 			}
 			else
-			{
-				if (t->Age > 0)
-				{
-					t->Age--;
-					float n = t->Age / t->Lifespan;
-					t->LedColor = Color(n, n, n);
-				}
-				else
-				{
-					t->Lifespan = randFloat(120, 240);
-					t->Age = t->Lifespan;
-					t->LedColor = Color::white();
-				}
-			}
+				t->LedColor = Color::white();
 		}
 	}
 
